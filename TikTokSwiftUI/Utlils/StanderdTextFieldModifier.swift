@@ -14,6 +14,10 @@ struct StanderdTextFieldModifier: ViewModifier {
             .padding(12)
             .background(Color(.systemGray6))
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(Color(.systemGray5), lineWidth: 1.0)
+            }
     }
 }
 

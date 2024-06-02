@@ -13,7 +13,7 @@ struct SignUpView: View {
     @State private var fullname = ""
     @State private var username = ""
     @Environment(\.dismiss) private var dismiss
-    
+    @StateObject private var signUpVM = SignupViewModel(authService: AuthService())
     
     
     var body: some View {
@@ -45,6 +45,9 @@ struct SignUpView: View {
             
             Button {
                 // Sign in Here
+                Task {
+                    await signUpVM.createUser(withEmail: email, fullname: fullname, username: username, password: password)
+                }
             } label: {
                 Text("Sign in")
                     .font(.subheadline)

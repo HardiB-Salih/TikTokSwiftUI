@@ -1,5 +1,5 @@
 //
-//  CreateUserViewModel.swift
+//  SignupViewModel.swift
 //  TikTokSwiftUI
 //
 //  Created by HardiB.Salih on 6/2/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-class CreateUserViewModel: ObservableObject {
+class SignupViewModel: ObservableObject {
     private let authService: AuthService
     
     init (authService: AuthService){

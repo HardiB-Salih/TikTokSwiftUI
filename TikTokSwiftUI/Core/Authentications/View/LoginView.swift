@@ -12,6 +12,7 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -57,7 +58,6 @@ struct LoginView: View {
                 .disabled(!formIsValid)
                 .opacity(formIsValid ? 1.0 : 0.6)
                 
-                
                 Spacer()
                 
                 Divider()
@@ -72,9 +72,7 @@ struct LoginView: View {
                     }
                     .font(.footnote)
                     .padding(.top)
-                    
                 }
-
             }
             .padding()
         }
@@ -85,20 +83,20 @@ struct LoginView: View {
 //MARK: - AuthenticationFormProtocol
 extension LoginView: AuthenticationFormProtocol {
     var formIsValid: Bool {
-            // Trimming whitespace
-            let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
-            let trimmedPassword = password.trimmingCharacters(in: .whitespacesAndNewlines)
-            
-            // Email validation
-            let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-            let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-            let isEmailValid = emailPredicate.evaluate(with: trimmedEmail)
-            
-            // Other validations
-            let isPasswordValid = !trimmedPassword.isEmpty && trimmedPassword.count >= 6
-            
-            return isEmailValid && isPasswordValid
-        }
+        // Trimming whitespace
+        let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedPassword = password.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // Email validation
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        let isEmailValid = emailPredicate.evaluate(with: trimmedEmail)
+        
+        // Other validations
+        let isPasswordValid = !trimmedPassword.isEmpty && trimmedPassword.count >= 6
+        
+        return isEmailValid && isPasswordValid
+    }
 }
 
 
