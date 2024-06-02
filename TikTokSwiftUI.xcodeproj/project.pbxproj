@@ -37,6 +37,8 @@
 		D57DE7822C0CCE3500CB1BDE /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D57DE7812C0CCE3500CB1BDE /* FirebaseFirestoreSwift */; };
 		D57DE7842C0CCE3500CB1BDE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D57DE7832C0CCE3500CB1BDE /* FirebaseStorage */; };
 		D57DE7862C0CD01B00CB1BDE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D57DE7852C0CD01B00CB1BDE /* GoogleService-Info.plist */; };
+		D5CFD7652C0CE527008599DB /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CFD7642C0CE527008599DB /* AuthService.swift */; };
+		D5CFD7672C0CE678008599DB /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CFD7662C0CE678008599DB /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,8 @@
 		D57DE7762C0CB8D900CB1BDE /* StanderdTextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StanderdTextFieldModifier.swift; sourceTree = "<group>"; };
 		D57DE7782C0CC60C00CB1BDE /* AuthenticationFormProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationFormProtocol.swift; sourceTree = "<group>"; };
 		D57DE7852C0CD01B00CB1BDE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D5CFD7642C0CE527008599DB /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		D5CFD7662C0CE678008599DB /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +319,7 @@
 		D57DE76C2C0CB84200CB1BDE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				D5CFD7662C0CE678008599DB /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 		D57DE76D2C0CB84300CB1BDE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D5CFD7642C0CE527008599DB /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -434,8 +440,10 @@
 				D57DE74C2C0C6F7200CB1BDE /* FeedView.swift in Sources */,
 				D57DE75A2C0C840900CB1BDE /* ProfileHeaderView.swift in Sources */,
 				D57DE75F2C0C8B5900CB1BDE /* PostGridView.swift in Sources */,
+				D5CFD7672C0CE678008599DB /* LoginViewModel.swift in Sources */,
 				D57DE7522C0C7D4800CB1BDE /* UserCell.swift in Sources */,
 				D57DE7772C0CB8D900CB1BDE /* StanderdTextFieldModifier.swift in Sources */,
+				D5CFD7652C0CE527008599DB /* AuthService.swift in Sources */,
 				D57DE7482C0C60BC00CB1BDE /* Color + Extension.swift in Sources */,
 				D57DE7612C0C90B000CB1BDE /* Post.swift in Sources */,
 				D57DE7442C0C5BA000CB1BDE /* MainTabView.swift in Sources */,
