@@ -7,6 +7,7 @@
 
 import Firebase
 
+@MainActor
 /// A service that manages user authentication and user data operations.
 class AuthService {
     
@@ -25,7 +26,8 @@ class AuthService {
     ///   - password: The password of the user.
     /// - Throws: An error if the login fails.
     func login(withEmail email: String, password: String) async throws {
-        try await Auth.auth().signIn(withEmail: email, password: password)
+        let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
+        self.userSession = authResult.user
     }
     
     /// Creates a new user with the specified email, full name, username, and password.
@@ -52,6 +54,7 @@ class AuthService {
         ]
 
         try await Firestore.firestore().collection("users").document(authResult.user.uid).setData(userData)
+        self.userSession = authResult.user
     }
     
     /// Sends a password reset email to the specified email address.
@@ -64,10 +67,7 @@ class AuthService {
 
     /// Signs out the current user.
     func signOut() {
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            print(error.localizedDescription)
-        }
+        try? Auth.auth().signOut()
+        self.userSession = nil
     }
 }

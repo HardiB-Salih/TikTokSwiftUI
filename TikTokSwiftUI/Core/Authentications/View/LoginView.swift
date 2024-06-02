@@ -8,9 +8,16 @@
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject private var loginVM = LoginViewModel(authService: AuthService())
+    private let authService: AuthService
+    @StateObject private var loginVM : LoginViewModel
     @State private var email = ""
     @State private var password = ""
+    @State private var isLoading = false
+    
+    init(authService: AuthService) {
+        self.authService = authService
+        self._loginVM = StateObject(wrappedValue: LoginViewModel(authService: authService))
+    }
     
     
     var body: some View {
@@ -45,16 +52,27 @@ struct LoginView: View {
                 
                 
                 Button {
-                    Task { await loginVM.login(withEmail: email, password: password) }
+                    isLoading = true
+                    Task {
+                        await loginVM.login(withEmail: email, password: password)
+                        isLoading = false
+                    }
                 } label: {
-                    Text("Sign in")
-                        .font(.subheadline)
-                        .foregroundStyle(.white)
-                        .padding(.vertical, 12)
-                        .frame(maxWidth: .infinity)
-                        .background(Color(.systemPink))
-                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                            .tint(.white)
+                    } else {
+                        Text("Sign in")
+                            .font(.subheadline)
+                            .foregroundStyle(.white)
+                        
+                    }
                 }
+                .padding(.vertical, 12)
+                .frame(maxWidth: .infinity)
+                .background(Color(.systemPink))
+                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                 .disabled(!formIsValid)
                 .opacity(formIsValid ? 1.0 : 0.6)
                 
@@ -63,7 +81,7 @@ struct LoginView: View {
                 Divider()
                 
                 NavigationLink {
-                    SignUpView()
+                    SignUpView(authService: authService)
                 } label: {
                     HStack (spacing: 3){
                         Text("Don't have an account?")
@@ -101,7 +119,7 @@ extension LoginView: AuthenticationFormProtocol {
 
 
 #Preview {
-    LoginView()
+    LoginView(authService: AuthService())
 }
 
 

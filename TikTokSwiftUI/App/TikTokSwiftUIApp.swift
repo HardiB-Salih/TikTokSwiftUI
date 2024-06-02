@@ -19,13 +19,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct TikTokSwiftUIApp: App {
-    
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    private let authService = AuthService()
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(authService: authService)
         }
     }
 }

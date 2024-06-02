@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct SignUpView: View {
+    @State private var isLoading = false
     @State private var email = ""
     @State private var password = ""
     @State private var fullname = ""
     @State private var username = ""
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var signUpVM = SignupViewModel(authService: AuthService())
     
+    @StateObject private var signUpVM : SignupViewModel
+    private let authService: AuthService
+    
+    init(authService: AuthService) {
+        self.authService = authService
+        self._signUpVM = StateObject(wrappedValue: SignupViewModel(authService: authService))
+    }
     
     var body: some View {
         VStack {
@@ -44,20 +51,30 @@ struct SignUpView: View {
             
             
             Button {
-                // Sign in Here
+                isLoading = true
                 Task {
                     await signUpVM.createUser(withEmail: email, fullname: fullname, username: username, password: password)
+                    isLoading = false
+
                 }
             } label: {
-                Text("Sign in")
-                    .font(.subheadline)
-                    .foregroundStyle(.white)
-                    .padding(.vertical, 12)
-                    .frame(maxWidth: .infinity)
-                    .background(Color(.systemPink))
-                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                    .padding(.vertical)
+                
+                if isLoading {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .tint(.white)
+                } else {
+                    Text("Sign up")
+                        .font(.subheadline)
+                        .foregroundStyle(.white)
+                    
+                }
             }
+            .padding(.vertical, 12)
+            .frame(maxWidth: .infinity)
+            .background(Color(.systemPink))
+            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .padding(.vertical)
             .disabled(!formIsValid)
             .opacity(formIsValid ? 1.0 : 0.6)
             
@@ -83,7 +100,7 @@ struct SignUpView: View {
 }
 
 #Preview {
-    SignUpView()
+    SignUpView(authService: AuthService())
 }
 
 

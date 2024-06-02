@@ -12,6 +12,11 @@ struct MainTabView: View {
     @State private var showCreateThread = false
     @Namespace private var tabAnimation
     
+    private let authService: AuthService
+    init(authService: AuthService) {
+        self.authService = authService
+    }
+    
     var body: some View {
         TabView(selection: $selectedTab) {
             FeedView()
@@ -57,7 +62,7 @@ struct MainTabView: View {
                 .onAppear { selectedTab = 3 }
                 .tag(3)
             
-            CurrentUserView()
+            CurrentUserView(authService: authService)
                 .tabItem {
                     VStack {
                         Image(systemName: selectedTab == 4 ? "person.fill" : "person")
@@ -86,6 +91,6 @@ struct MainTabView: View {
 }
 
 #Preview {
-    MainTabView()
+    MainTabView(authService: AuthService())
 }
 
