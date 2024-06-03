@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ProfileHeaderView: View {
+    let user: User
+    
     var body: some View {
         VStack (spacing: 16){
             VStack(spacing: 8) {
@@ -16,7 +18,7 @@ struct ProfileHeaderView: View {
                     .frame(width: 80, height: 80)
                     .foregroundStyle(Color(.systemGray5))
                 
-                Text("@hardiB.sal")
+                Text("@\(user.username)")
                     .font(.subheadline)
                     .fontWeight(.semibold)
             }
@@ -42,8 +44,8 @@ struct ProfileHeaderView: View {
     }
 }
 
-#Preview {
-    ProfileHeaderView()
-}
+//#Preview {
+//    ProfileHeaderView()
+//}
 
 

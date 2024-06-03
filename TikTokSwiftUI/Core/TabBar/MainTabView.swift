@@ -12,9 +12,11 @@ struct MainTabView: View {
     @State private var showCreateThread = false
     @Namespace private var tabAnimation
     
+    private let currentUser: User
     private let authService: AuthService
-    init(authService: AuthService) {
+    init(authService: AuthService,  currentUser: User) {
         self.authService = authService
+        self.currentUser = currentUser
     }
     
     var body: some View {
@@ -62,7 +64,7 @@ struct MainTabView: View {
                 .onAppear { selectedTab = 3 }
                 .tag(3)
             
-            CurrentUserView(authService: authService)
+            CurrentUserView(authService: authService, user: currentUser)
                 .tabItem {
                     VStack {
                         Image(systemName: selectedTab == 4 ? "person.fill" : "person")
@@ -78,19 +80,19 @@ struct MainTabView: View {
             withAnimation(.smooth) {
                 if newValue == 2 {
                     showCreateThread = true
-                    selectedTab = 0
+                    selectedTab = oldValue
+                    // or use one of the tab as a selected tab
                 }
             }
         })
         .sheet(isPresented: $showCreateThread) {
-            //            CreateThreadView(isPresented: $showCreateThread)
             Text("Createion Page")
         }
         .tint(Color(.label))
     }
 }
 
-#Preview {
-    MainTabView(authService: AuthService())
-}
+//#Preview {
+//    MainTabView(authService: AuthService())
+//}
 
